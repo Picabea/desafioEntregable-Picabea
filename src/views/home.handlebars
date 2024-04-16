@@ -1,0 +1,17 @@
+<div id="products">
+    {{#each response.payload}}
+        <h3>{{this.title}}</h3>
+        <p>{{this.description}}</p>
+        <p>Su codigo es {{this.code}}, vale ${{this.price}} y hay {{this.stock}} en stock</p>
+        <button id="button_{{this._id}}">Agregar al carrito</button>
+    {{/each}}
+
+    Pagina: {{response.page}}
+    {{#if response.hasPrevPage}}
+    <a href={{response.prevLink}}>Pagina Anterior</a>
+    {{/if}}
+    {{#if response.hasNextPage}}
+    <a href={{response.nextLink}}>Pagina Siguiente</a>
+    {{/if}}
+</div>
+
