@@ -1,5 +1,8 @@
 const { Router } = require('express')
 const productManager = require('../dao/dbManagers/productManager.js')
+
+const UserModel = require('../dao/models/user.model.js')
+
 const router = Router()
 
 router.get('/', async (req, res) => {
@@ -13,10 +16,25 @@ router.get('/', async (req, res) => {
         let queryContent = req.query.queryContent
         let data = await productManager.getProducts(limit, page, sort, queryField, queryContent)
 
-        console.log(data)
+        const userEmail = req.session.user.email
+
+        let user;
+        
+        user = await UserModel.findOne({email: userEmail}).lean()
+
+        if(userEmail === "adminCoder@coder.com"){
+            user = {
+                firstName: "Admin",
+                lastName: "Coder",
+                age: "-",
+                email: "adminCoder@coder.com"
+            }
+        }
+        console.log(user)
         res.status(200).render('home', {response: data,
         scripts: ["products.js"],
-        useWS: true})
+        useWS: true,
+        user})
     }catch(err){
         console.log(err)
         res.status(400).json({success: "error"})

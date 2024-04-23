@@ -133,7 +133,6 @@ class ProductManager{
             prevLink,
             nextLink
         }
-        console.log(data)
         return data;
       }
     })

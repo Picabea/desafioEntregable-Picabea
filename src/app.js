@@ -5,6 +5,8 @@ const messageModel = require("./dao/models/message.model.js")
 const productsRouter = require('./routes/products.router.js')
 const cartsRouter = require('./routes/carts.router.js')
 const chatRouter = require('./routes/chat.router.js')
+const viewsRouter = require('./routes/views.router.js')
+const sessionRouter = require('./routes/session.router.js')
 
 const handlebars = require('express-handlebars')
 const { Server } = require('socket.io')
@@ -14,6 +16,8 @@ const cart = require("./dao/dbManagers/carts.js")
 
 const mongoose = require('mongoose')
 
+const sessionMiddleware = require('./session/mongoStorage.js')
+
 const app = express()
 
 //Configuracion handlebars
@@ -22,6 +26,7 @@ app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars')
 app.use(express.static(`${__dirname}/../public`))
 
+app.use(sessionMiddleware)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -30,7 +35,8 @@ app.use(express.static('./public'))
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
 app.use('/chat', chatRouter)
-
+app.use('/', viewsRouter)
+app.use('/api/sessions', sessionRouter)
 
 
 const main = async() => {
