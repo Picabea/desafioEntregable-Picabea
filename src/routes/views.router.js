@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/login', userIsNotLoggedIn, (_, res) => {
-    // TODO: agregar middleware, sólo se puede acceder si no está logueado
+    // sólo se puede acceder si no está logueado
     res.render('login', {
         title: 'Login'
     })
 })
 
 router.get('/register', userIsNotLoggedIn, (_, res) => {
-    // TODO: agregar middleware, sólo se puede acceder si no está logueado
+    // sólo se puede acceder si no está logueado
     res.render('register', {
         title: 'Register'
     })
@@ -54,4 +54,7 @@ router.get('/profile', userIsLoggedIn, async(req, res) => {
     })
 })
 
+router.get('/restorePassword', userIsNotLoggedIn, (req, res) => {
+    res.render('restorePassword')
+})
 module.exports = router

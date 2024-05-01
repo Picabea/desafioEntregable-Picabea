@@ -2,6 +2,10 @@ const express = require('express')
 
 const messageModel = require("./dao/models/message.model.js")
 
+const passport = require('passport')
+const initializeStrategy = require('./config/passport.config.js')
+const initializeGithubStrategy = require('./config/passport-github.config.js')
+
 const productsRouter = require('./routes/products.router.js')
 const cartsRouter = require('./routes/carts.router.js')
 const chatRouter = require('./routes/chat.router.js')
@@ -27,6 +31,12 @@ app.set('view engine', 'handlebars')
 app.use(express.static(`${__dirname}/../public`))
 
 app.use(sessionMiddleware)
+
+initializeGithubStrategy()
+initializeStrategy()
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -37,7 +47,6 @@ app.use('/api/products', productsRouter)
 app.use('/chat', chatRouter)
 app.use('/', viewsRouter)
 app.use('/api/sessions', sessionRouter)
-
 
 const main = async() => {
     await mongoose.connect('mongodb://127.0.0.1:27017',{

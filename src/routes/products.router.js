@@ -3,9 +3,13 @@ const productManager = require('../dao/dbManagers/productManager.js')
 
 const UserModel = require('../dao/models/user.model.js')
 
+// const { verifyToken } = require('../utils/utils.js')
+
 const router = Router()
 
 router.get('/', async (req, res) => {
+    // const { email } = req.authUser
+    // console.log(email)
     try{
         let limit = req.query.limit
         ?req.query.limit
