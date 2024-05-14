@@ -1,0 +1,12 @@
+<div>
+    <p>{{user.firstName}} {{user.lastName}}</p>
+    <p>{{user.email}}</p>
+    <div>
+        Id carrito: {{cart._id}}
+        {{#each cart.products}}
+            <h3>{{this.productId.title}}</h3>
+            <p>{{this.productId.description}}</p>
+            <p>Su codigo es {{this.productId.code}}, vale ${{this.productId.price}} y hay {{this.productId.stock}} en stock</p>
+        {{/each}}
+    </div>
+</div>

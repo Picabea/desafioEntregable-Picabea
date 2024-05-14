@@ -12,7 +12,19 @@ const schema = new mongoose.Schema({
     role: {
         type: String,
         enum: ["user", "admin"]
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cart"
     }
+})
+
+schema.pre('find', function(){
+    this.populate('cart')
+})
+
+schema.pre('findOne', function(){
+    this.populate('cart')
 })
 
 module.exports = mongoose.model('User', schema, 'users')

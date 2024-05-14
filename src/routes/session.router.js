@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 const User = require("../dao/models/user.model.js")
 const { hashPassword, isValidPassword } = require('../utils/hashing.js')
+const { userIsLoggedIn } = require('../middlewares/auth.middleware.js')
 
 const passport = require('passport')
 
@@ -30,6 +31,21 @@ router.get('/logout', (req, res) => {
     req.session.destroy(_ => {
         res.redirect('/login')
     })
+})
+
+router.get('/current', userIsLoggedIn, async (req, res) => {
+    try{
+        const userEmail = req.session.user.email
+        console.log(userEmail)
+        const user = await User.findOne({email: userEmail}).lean()
+        console.log(user)
+        res.render('currentUser', {
+            user,
+            cart: user.cart
+        })
+    }catch(err){
+        res.status(400).json({error: err})
+    }
 })
 
 router.post("/restorePassword", async (req, res) => {
