@@ -12,12 +12,13 @@ router.get('/:cid', (req, res) => {
 
 router.post('/', async (req, res) => {
     const products = req.body
+    console.log(products)
     if(products.length >= 1){
         res.send(await cart.createCart(products))
     }else{
-        res.send("Envie al menos un producto")
+        res.send(await cart.createCart([]))
+        // res.send("Envie al menos un producto")
     }
-    
 })
 
 router.post('/:cid/product/:pid', (req, res) => {

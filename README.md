@@ -33,3 +33,4 @@ Los routers cuentan con los siguientes protocolos:
 Aclaracion: El archivo createProducts.js utiliza faker para crear productos (la categoria no corresponde con el producto pero sirve para testear)
 Al fondo de carts js de db managers se encunetran algunas lineas para testear parte del codigo
 
+Al usuario se le crea automaticamente un carrito. El mismo es al que se le agregan productos cuando se clickea en los botones de la vista "home"

@@ -38,7 +38,8 @@ router.get('/', async (req, res) => {
         res.status(200).render('home', {response: data,
         scripts: ["products.js"],
         useWS: true,
-        user})
+        user,
+        cid: user.cart._id.toString()})
     }catch(err){
         console.log(err)
         res.status(400).json({success: "error"})

@@ -128,14 +128,14 @@ module.exports = cart
 
 //Codigo para hacer post del cart:
 // [
-    // {
-    //     "productId": "660c3d464eb0ad95e8415901",
-    //     "quantity": 5
-    // },
-    // {
-    //     "productId": "660c84fabbe12d13695",
-    //     "quantity": 10
-    // }
+//     {
+//         "productId": "660c3d464eb0ad95e8415901",
+//         "quantity": 5
+//     },
+//     {
+//         "productId": "660c84fabbe12d13695",
+//         "quantity": 10
+//     }
 // ]
 
 

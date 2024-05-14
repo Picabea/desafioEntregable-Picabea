@@ -1,7 +1,7 @@
 <div id="products">
     <h1>Bienvenido {{user.role}} {{user.firstName}} {{user.lastName}} de {{user.age}} año/s</h1>
     <h2>Cuenta asociada a {{user.email}}</h2>
-
+    <b id="cart">{{cid}}</b>
     {{#each response.payload}}
         <h3>{{this.title}}</h3>
         <p>{{this.description}}</p>

@@ -9,11 +9,11 @@ for(const button of buttons){
             productId,
             quantity: 1
         }
-        const cart = hasCart()
-        console.log(productId)
+        const cart = document.querySelector("#cart").innerHTML
+        console.log(cart)
         if(cart){
             socket.emit("addProductToCart", {
-                cid: localStorage.getItem("cart"), 
+                cid: cart, 
                 pid: productId
         })
         }else{
